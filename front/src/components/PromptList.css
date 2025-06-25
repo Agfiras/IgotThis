@@ -15,15 +15,25 @@
   padding: 6px 18px;
   border-radius: 20px;
   border: 1px solid #ddd;
-  background: #f5f6fa;
-  color: #2563eb;
+  background: rgba(245,246,250,0.95);
+  color: #111;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 .tag-btn-active, .tag-btn:hover {
   background: #2563eb;
   color: #fff;
+}
+.dark .tag-btn {
+  background: rgba(35,38,47,0.95);
+  color: #f3f4f6;
+  border: 1px solid #333;
+}
+.dark .tag-btn-active, .dark .tag-btn:hover {
+  background: #60a5fa;
+  color: #23262f;
 }
 
 .prompt-grid {
@@ -33,12 +43,12 @@
 }
 
 .prompt-card {
-  background: #fff;
+  background: rgba(255,255,255,0.98);
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   padding: 28px 22px 22px 22px;
   text-decoration: none;
-  color: inherit;
+  color: #111;
   display: flex;
   flex-direction: column;
   min-height: 220px;
@@ -47,6 +57,11 @@
 .prompt-card:hover {
   box-shadow: 0 4px 24px rgba(37,99,235,0.13);
   transform: translateY(-2px) scale(1.02);
+}
+.dark .prompt-card {
+  background: rgba(35,38,47,0.98);
+  color: #f3f4f6;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
 .prompt-title {
   font-size: 1.25rem;
@@ -69,13 +84,24 @@
   border-radius: 12px;
   padding: 2px 10px;
 }
+.dark .tag {
+  background: #23262f;
+  color: #60a5fa;
+}
 .prompt-body {
   font-size: 1rem;
-  color: #444;
+  color: #222;
   margin-top: auto;
+}
+.dark .prompt-body {
+  color: #f3f4f6;
 }
 .prompt-loading, .prompt-error, .prompt-end {
   text-align: center;
   margin: 32px 0 0 0;
   font-size: 1.1rem;
+  color: #111;
+}
+.dark .prompt-loading, .dark .prompt-error, .dark .prompt-end {
+  color: #f3f4f6;
 } 
