@@ -1,0 +1,84 @@
+.app-container {
+  min-height: 100vh;
+  background: #f5f6fa;
+  color: #222;
+}
+.dark .app-container {
+  background: #181a20;
+  color: #f3f4f6;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.dark .app-header {
+  background: #23262f;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+.dark .app-title {
+  color: #60a5fa;
+}
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.app-header-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.app-header-btn-secondary {
+  background: #e0e7ff;
+  color: #2563eb;
+}
+.dark .app-header-btn {
+  background: #60a5fa;
+  color: #23262f;
+}
+.dark .app-header-btn-secondary {
+  background: #23262f;
+  color: #60a5fa;
+  border: 1px solid #60a5fa;
+}
+.app-header-btn:hover {
+  background: #1746a2;
+  color: #fff;
+}
+.app-header-btn-secondary:hover {
+  background: #c7d2fe;
+  color: #1746a2;
+}
+.dark .app-header-btn:hover {
+  background: #2563eb;
+  color: #fff;
+}
+.dark .app-header-btn-secondary:hover {
+  background: #181a20;
+  color: #60a5fa;
+}
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 24px 24px;
+} 

@@ -1,9 +1,0 @@
----
-rule_type: auto
-globs: ["src/**/*.jsx", "components/**/*.jsx"]
----
-- Use functional components and React Hooks (`useState`, `useEffect`).
-- Always destructure props.
-- Keep JSX clean — minimal inline logic.
-- Use `fetch(...)` or `axios` to call backend APIs.
-- Provide loading/error state feedback (e.g., “Loading…”).

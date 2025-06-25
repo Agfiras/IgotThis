@@ -14,8 +14,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       localStorage.setItem('jwt', token);
-      // Optionally decode user info from JWT here
-      setUser({}); // Placeholder, you may decode JWT for user info
+      setUser({}); // Optionally decode JWT for user info
     } else {
       localStorage.removeItem('jwt');
       setUser(null);
@@ -32,4 +31,4 @@ function AuthProvider({ children }) {
   );
 }
 
-export default AuthProvider; 
+export default AuthProvider;

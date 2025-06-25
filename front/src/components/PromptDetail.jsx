@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import './PromptDetail.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
@@ -32,27 +33,29 @@ function PromptDetail() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
-  if (error || !prompt) return <div className="text-center text-red-500 py-8">{error || 'Prompt not found'}</div>;
+  if (loading) return <div className="prompt-detail-loading">Loading...</div>;
+  if (error || !prompt) return <div className="prompt-detail-error">{error || 'Prompt not found'}</div>;
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <Link to="/" className="text-blue-600 dark:text-blue-300 hover:underline">← Back to all prompts</Link>
-      <h1 className="text-2xl font-bold mt-4 mb-2">{prompt.title}</h1>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {prompt.tags.map(tag => (
-          <span key={tag} className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-0.5 rounded">{tag}</span>
-        ))}
+    <div className="prompt-detail-container">
+      <div className="prompt-detail-card">
+        <Link to="/" className="prompt-detail-back">← Back to all prompts</Link>
+        <h1 className="prompt-detail-title">{prompt.title}</h1>
+        <div className="prompt-detail-tags">
+          {prompt.tags.map(tag => (
+            <span key={tag} className="tag">{tag}</span>
+          ))}
+        </div>
+        <pre className="prompt-detail-body">{prompt.body}</pre>
+        <button
+          onClick={handleCopy}
+          className="prompt-detail-copy"
+        >
+          {copied ? 'Copied!' : 'Copy to Clipboard'}
+        </button>
       </div>
-      <pre className="whitespace-pre-wrap bg-gray-100 dark:bg-gray-800 p-4 rounded mb-4 text-sm overflow-x-auto">{prompt.body}</pre>
-      <button
-        onClick={handleCopy}
-        className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
-      >
-        {copied ? 'Copied!' : 'Copy to Clipboard'}
-      </button>
     </div>
   );
 }
 
-export default PromptDetail; 
+export default PromptDetail;

@@ -6,7 +6,7 @@ import PromptList from './components/PromptList';
 import PromptDetail from './components/PromptDetail';
 import NewPrompt from './components/NewPrompt';
 import ProtectedRoute from './components/ProtectedRoute';
-import './App.css';
+import './AppLayout.css';
 
 function Header() {
   const { token, logout } = useAuth();
@@ -16,19 +16,19 @@ function Header() {
     navigate('/login');
   };
   return (
-    <header className="flex items-center justify-between px-4 py-3 shadow bg-white dark:bg-gray-800">
-      <Link to="/" className="text-xl font-bold">Prompt Library</Link>
-      <div className="flex items-center gap-2">
+    <header className="app-header">
+      <Link to="/" className="app-title">Prompt Library</Link>
+      <div className="app-header-actions">
         {token && (
           <>
             <Link
               to="/new"
-              className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+              className="app-header-btn"
             >
               New Prompt
             </Link>
             <button
-              className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+              className="app-header-btn app-header-btn-secondary"
               onClick={handleLogout}
             >
               Logout
@@ -47,14 +47,14 @@ function DarkModeToggle() {
   );
   useEffect(() => {
     if (dark) {
-      document.documentElement.classList.add('dark');
+      document.body.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
     }
   }, [dark]);
   return (
     <button
-      className="ml-2 px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+      className="app-header-btn app-header-btn-secondary"
       onClick={() => setDark((d) => !d)}
       aria-label="Toggle dark mode"
     >
@@ -67,9 +67,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <div className="app-container">
           <Header />
-          <main className="max-w-5xl mx-auto p-4">
+          <main className="app-main">
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route element={<ProtectedRoute />}>
