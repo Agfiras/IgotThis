@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import './LoginPage.css';
 
@@ -8,12 +8,22 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('login');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [magicSent, setMagicSent] = useState(false);
+
+  // Handle Google OAuth token in URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+    if (token) {
+      login(token);
+      navigate('/');
+    }
+  }, [location, login, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,25 +48,8 @@ function LoginPage() {
     setLoading(false);
   };
 
-  const handleMagicLink = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch(`${API_URL}/auth/magic-link`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setMagicSent(true);
-      } else {
-        setError(data.error || 'Failed to send magic link');
-      }
-    } catch {
-      setError('Network error');
-    }
-    setLoading(false);
+  const handleGoogle = () => {
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   return (
@@ -86,10 +79,16 @@ function LoginPage() {
           <button type="button" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
             {mode === 'login' ? 'Need an account? Register' : 'Already have an account? Login'}
           </button>
-          <button type="button" onClick={handleMagicLink} disabled={loading || !email}>
-            {magicSent ? 'Magic link sent!' : 'Send magic link'}
-          </button>
         </div>
+        <button
+          type="button"
+          onClick={handleGoogle}
+          className="google-btn"
+          style={{ marginTop: 24 }}
+        >
+          <span style={{ marginRight: 8, fontSize: 20 }}>🔵</span>
+          Sign in with Google
+        </button>
         {error && <div className="login-error">{error}</div>}
       </div>
     </div>

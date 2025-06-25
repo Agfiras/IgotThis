@@ -5,11 +5,23 @@ const promptsRouter = require('./routes/prompts');
 const tagsRouter = require('./routes/tags');
 const authRouter = require('./routes/auth');
 const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const initPassport = require('./passport');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }, // set to true if using HTTPS
+}));
+initPassport();
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/api/prompts', promptsRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/auth', authRouter);

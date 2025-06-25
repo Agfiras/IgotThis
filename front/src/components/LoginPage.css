@@ -131,3 +131,36 @@
     font-size: 1.1rem;
     font-weight: 500;
   }
+
+  .google-btn {
+    width: auto;
+    min-width: 180px;
+    max-width: 260px;
+    margin: 16px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 22px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1.5px 8px rgba(66,133,244,0.07);
+    transition: background 0.2s, color 0.2s, border 0.2s;
+  }
+  .google-btn:hover {
+    background: #1746a2;
+    color: #fff;
+  }
+  .dark .google-btn {
+    background: #60a5fa;
+    color: #23262f;
+    border: none;
+  }
+  .dark .google-btn:hover {
+    background: #2563eb;
+    color: #fff;
+  }

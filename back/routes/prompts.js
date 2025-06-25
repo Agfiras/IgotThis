@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const { search, tag, page = 1, limit = 10 } = req.query;
     const query = {};
     if (search) query.$text = { $search: search };
-    if (tag) query.tags = { $regex: `^${tag}$`, $options: 'i' };
+    if (tag) query.tags = { $in: [tag.toLowerCase()] };
     const prompts = await Prompt.find(query)
       .sort({ createdAt: -1, _id: -1 })
       .skip((parseInt(page) - 1) * parseInt(limit))
@@ -24,7 +24,10 @@ router.post('/', requireAuth, async (req, res) => {
     const { title, body, tags } = req.body;
     if (!title || !body) return res.status(400).json({ error: 'Title and body are required' });
     const prompt = await Prompt.create({
-      title, body, tags: Array.isArray(tags) ? tags : [], authorId: req.user._id,
+      title,
+      body,
+      tags: Array.isArray(tags) ? tags.map(t => t.trim().toLowerCase()).filter(Boolean) : [],
+      authorId: req.user._id,
     });
     res.status(201).json(prompt);
   } catch {
@@ -50,7 +53,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     if (!prompt.authorId.equals(req.user._id)) return res.status(403).json({ error: 'Not authorized' });
     if (title) prompt.title = title;
     if (body) prompt.body = body;
-    if (tags) prompt.tags = Array.isArray(tags) ? tags : [];
+    if (tags) prompt.tags = Array.isArray(tags) ? tags.map(t => t.trim().toLowerCase()).filter(Boolean) : [];
     await prompt.save();
     res.json(prompt);
   } catch {
