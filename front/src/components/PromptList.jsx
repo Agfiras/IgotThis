@@ -24,7 +24,7 @@ function PromptList() {
   }, []);
 
   const handleTagClick = (tag) => {
-    setSelectedTag(tag);
+    setSelectedTag(prev => (prev.toLowerCase() === tag.toLowerCase() ? '' : tag));
     setPrompts([]);
     setPage(1);
     setHasMore(true);
@@ -136,12 +136,6 @@ function PromptList() {
         </button>
       </div>
       <div className="tag-bar">
-        <button
-          className={`tag-btn${!selectedTag ? ' tag-btn-active' : ''}`}
-          onClick={() => handleTagClick('')}
-        >
-          All
-        </button>
         {tags.map(tag => (
           <button
             key={tag}

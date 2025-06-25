@@ -6,6 +6,8 @@ import PromptList from './components/PromptList';
 import PromptDetail from './components/PromptDetail';
 import NewPrompt from './components/NewPrompt';
 import ProtectedRoute from './components/ProtectedRoute';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 import './AppLayout.css';
 
 function Header() {
@@ -75,6 +77,8 @@ function App() {
           <main className="app-main">
             <Routes>
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<PromptList />} />
                 <Route path="/prompt/:id" element={<PromptDetail />} />

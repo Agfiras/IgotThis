@@ -79,6 +79,11 @@ function LoginPage() {
           <button type="button" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
             {mode === 'login' ? 'Need an account? Register' : 'Already have an account? Login'}
           </button>
+          {mode === 'login' && (
+            <button type="button" className="forgot-password-link" onClick={() => navigate('/forgot-password')}>
+              Forgot Password?
+            </button>
+          )}
         </div>
         <button
           type="button"
@@ -86,7 +91,7 @@ function LoginPage() {
           className="google-btn"
           style={{ marginTop: 24 }}
         >
-          <span style={{ marginRight: 8, fontSize: 20 }}>🔵</span>
+          <span style={{ marginRight: 8, fontSize: 20 }}>👩‍🚀</span>
           {mode === 'login' ? 'Login with Google' : 'Sign in with Google'}
         </button>
         {error && <div className="login-error">{error}</div>}

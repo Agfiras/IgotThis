@@ -8,6 +8,8 @@ const UserSchema = new Schema({
   magicLinkExpires: { type: Date, default: null },
   provider: { type: String, default: 'local' },
   providerId: { type: String, default: null },
+  resetPasswordToken: { type: String, default: null },
+  resetPasswordExpires: { type: Date, default: null },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);
