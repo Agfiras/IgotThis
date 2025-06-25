@@ -165,7 +165,7 @@ function PromptList() {
       </div>
       {loading && <div className="prompt-loading">Loading...</div>}
       {error && <div className="prompt-error">{error}</div>}
-      {!hasMore && <div className="prompt-end">No more prompts.</div>}
+      {!hasMore && <div className="prompt-end">Get Creative 😁.</div>}
     </div>
   );
 }

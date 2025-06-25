@@ -9,6 +9,23 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 32px;
+  position: relative;
+  animation: tagbar-move-bounce 13s linear infinite;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes tagbar-move-bounce {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 40px;
+  }
+  100% {
+    left: 0;
+  }
 }
 
 .tag-btn {
@@ -58,6 +75,42 @@
   min-width: 0;
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.prompt-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  pointer-events: none;
+  z-index: 2;
+}
+.prompt-card:hover::after {
+  border: 2px solid #c42614;
+  animation: border-move 2s linear infinite;
+}
+@keyframes border-move {
+  0% {
+    box-shadow: 0 0 0 0 #c42614;
+    border-color: #c42614;
+  }
+  25% {
+    box-shadow: 0 0 0 2px #c42614;
+    border-color: #c42614 transparent transparent transparent;
+  }
+  50% {
+    box-shadow: 0 0 0 2px #c42614;
+    border-color: transparent #c42614 transparent transparent;
+  }
+  75% {
+    box-shadow: 0 0 0 2px #c42614;
+    border-color: transparent transparent #c42614 transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #c42614;
+    border-color: #c42614;
+  }
 }
 .prompt-card:hover {
   box-shadow: 0 4px 24px rgba(196,38,20,0.13);
@@ -119,9 +172,10 @@
 .prompt-search-bar {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 10px;
-  margin-left: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
   max-width: 400px;
   position: relative;
@@ -209,11 +263,9 @@
 }
 
 .search-bar-left {
-  justify-content: flex-start;
-  margin-bottom: 10px;
-  margin-left: 0;
-  width: 100%;
-  max-width: 400px;
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 @media (max-width: 600px) {
   .search-bar-left {
