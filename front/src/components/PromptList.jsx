@@ -20,6 +20,14 @@ function PromptList() {
       .catch(() => setTags([]));
   }, []);
 
+  // Reset list on mount to avoid duplicates after navigation
+  useEffect(() => {
+    setPrompts([]);
+    setPage(1);
+    setHasMore(true);
+    setError('');
+  }, []);
+
   useEffect(() => {
     setPrompts([]);
     setPage(1);
@@ -35,7 +43,10 @@ function PromptList() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          setPrompts(prev => [...prev, ...data]);
+          setPrompts(prev => {
+            const ids = new Set(prev.map(p => p._id));
+            return [...prev, ...data.filter(p => !ids.has(p._id))];
+          });
           setHasMore(data.length === 10);
         } else {
           setError('Failed to load prompts');

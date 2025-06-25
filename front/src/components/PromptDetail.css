@@ -5,20 +5,29 @@
 }
 
 .prompt-detail-card {
-  background: #fff;
+  background: rgba(255,255,255,0.98);
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   padding: 40px 32px;
   max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
+  color: #111;
+}
+.dark .prompt-detail-card {
+  background: rgba(35,38,47,0.98);
+  color: #f3f4f6;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
 .prompt-detail-back {
   color: #2563eb;
   margin-bottom: 18px;
   text-decoration: none;
   font-size: 1rem;
+}
+.dark .prompt-detail-back {
+  color: #60a5fa;
 }
 .prompt-detail-title {
   font-size: 2rem;
@@ -38,14 +47,23 @@
   border-radius: 12px;
   padding: 2px 12px;
 }
+.dark .tag {
+  background: #23262f;
+  color: #60a5fa;
+}
 .prompt-detail-body {
-  background: #f5f6fa;
+  background: rgba(245,246,250,0.95);
   border-radius: 8px;
   padding: 18px;
   font-size: 1.1rem;
   margin-bottom: 24px;
   white-space: pre-wrap;
   font-family: inherit;
+  color: #222;
+}
+.dark .prompt-detail-body {
+  background: rgba(35,38,47,0.95);
+  color: #f3f4f6;
 }
 .prompt-detail-copy {
   background: #2563eb;
@@ -62,8 +80,20 @@
 .prompt-detail-copy:hover {
   background: #1746a2;
 }
+.dark .prompt-detail-copy {
+  background: #60a5fa;
+  color: #23262f;
+}
+.dark .prompt-detail-copy:hover {
+  background: #2563eb;
+  color: #fff;
+}
 .prompt-detail-loading, .prompt-detail-error {
   text-align: center;
   margin: 64px 0 0 0;
   font-size: 1.2rem;
+  color: #111;
+}
+.dark .prompt-detail-loading, .dark .prompt-detail-error {
+  color: #f3f4f6;
 } 

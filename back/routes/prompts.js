@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     if (search) query.$text = { $search: search };
     if (tag) query.tags = { $regex: `^${tag}$`, $options: 'i' };
     const prompts = await Prompt.find(query)
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: -1, _id: -1 })
       .skip((parseInt(page) - 1) * parseInt(limit))
       .limit(parseInt(limit));
     res.json(prompts);
