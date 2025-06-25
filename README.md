@@ -1,4 +1,9 @@
+
+<img src="front/public/logo.png" alt="Logo" width="200" height="200">
+
 # LLMrest
+- **Live Demo:** [https://igot-this.vercel.app/](https://igot-this.vercel.app/)
+- Please use: **admin.admin@com** and **admin** to fast access the demo  
 
 A full-stack prompt management and sharing platform built with:
 
