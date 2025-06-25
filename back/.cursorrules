@@ -9,3 +9,5 @@ rule_type: always
 - Validate API inputs (e.g. check required fields).
 - Handle errors with proper status codes and messages.
 - Return JSON responses consistently.
+- Place all Mongoose schemas in a 'models' folder.
+- Place all Express route handlers in a 'routes' folder.
