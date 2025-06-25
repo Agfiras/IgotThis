@@ -73,13 +73,23 @@ function NewPrompt() {
             value={tags}
             onChange={e => setTags(e.target.value)}
           />
-          <button
-            type="submit"
-            className="new-prompt-btn"
-            disabled={loading}
-          >
-            {loading ? 'Creating...' : 'Create Prompt'}
-          </button>
+          <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+            <button
+              type="submit"
+              className="new-prompt-btn"
+              disabled={loading}
+            >
+              {loading ? 'Creating...' : 'Create Prompt'}
+            </button>
+            <button
+              type="button"
+              className="new-prompt-btn new-prompt-cancel-btn"
+              onClick={() => navigate('/')}
+              disabled={loading}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
         {success && <div className="new-prompt-success">Prompt created!</div>}
         {error && <div className="new-prompt-error">{error}</div>}

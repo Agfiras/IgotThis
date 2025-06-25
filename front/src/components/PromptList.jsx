@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './PromptList.css';
 
@@ -12,6 +12,9 @@ function PromptList() {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [search, setSearch] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const debounceRef = useRef();
 
   useEffect(() => {
     fetch(`${API_URL}/tags`)
@@ -20,7 +23,40 @@ function PromptList() {
       .catch(() => setTags([]));
   }, []);
 
-  // Reset list on mount to avoid duplicates after navigation
+  const handleTagClick = (tag) => {
+    setSelectedTag(tag);
+    setPrompts([]);
+    setPage(1);
+    setHasMore(true);
+    setError('');
+  };
+
+  // Debounced search input
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setSearch(searchInput.trim());
+      setPrompts([]);
+      setPage(1);
+      setHasMore(true);
+      setError('');
+    }, 300);
+    return () => clearTimeout(debounceRef.current);
+  }, [searchInput]);
+
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setSearch('');
+    setSearchInput('');
+    setPrompts([]);
+    setPage(1);
+    setHasMore(true);
+    setError('');
+  };
+
   useEffect(() => {
     setPrompts([]);
     setPage(1);
@@ -38,7 +74,12 @@ function PromptList() {
     if (!hasMore || loading) return;
     setLoading(true);
     let url = `${API_URL}/prompts?page=${page}&limit=10`;
-    if (selectedTag) url += `&tag=${encodeURIComponent(selectedTag)}`;
+    if (selectedTag && selectedTag.trim() !== '') {
+      url += `&tag=${encodeURIComponent(selectedTag.toLowerCase())}`;
+    }
+    if (search && search.trim() !== '') {
+      url += `&search=${encodeURIComponent(search)}`;
+    }
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -57,7 +98,7 @@ function PromptList() {
         setError('Failed to load prompts');
         setLoading(false);
       });
-  }, [page, selectedTag]);
+  }, [page, selectedTag, search]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -74,18 +115,38 @@ function PromptList() {
 
   return (
     <div className="prompt-list">
+      <div className="prompt-search-bar search-bar-left">
+        <input
+          type="text"
+          className="prompt-search-input"
+          placeholder="Search by title or tag..."
+          value={searchInput}
+          onChange={handleSearchInput}
+        />
+        {search && (
+          <button type="button" onClick={handleClearSearch} className="prompt-search-clear" aria-label="Clear search">
+            ×
+          </button>
+        )}
+        <button type="button" className="prompt-search-icon-btn" tabIndex={-1} aria-label="Search" disabled>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" />
+            <line x1="14.4142" y1="14" x2="18" y2="17.5858" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
       <div className="tag-bar">
         <button
           className={`tag-btn${!selectedTag ? ' tag-btn-active' : ''}`}
-          onClick={() => setSelectedTag('')}
+          onClick={() => handleTagClick('')}
         >
           All
         </button>
         {tags.map(tag => (
           <button
             key={tag}
-            className={`tag-btn${selectedTag === tag ? ' tag-btn-active' : ''}`}
-            onClick={() => setSelectedTag(tag)}
+            className={`tag-btn${selectedTag.toLowerCase() === tag.toLowerCase() && selectedTag ? ' tag-btn-active' : ''}`}
+            onClick={() => handleTagClick(tag)}
           >
             {tag}
           </button>

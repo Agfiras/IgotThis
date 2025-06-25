@@ -24,11 +24,19 @@
 .app-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2563eb;
-  text-decoration: none;
+  color: #c42614;
+  text-decoration: none !important;
+  cursor: default !important;
 }
 .dark .app-title {
-  color: #60a5fa;
+  color: #c42614;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+.app-title:hover, .dark .app-title:hover, .app-title:focus, .dark .app-title:focus, .app-title:active, .dark .app-title:active {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: default !important;
 }
 .app-header-actions {
   display: flex;
@@ -36,7 +44,7 @@
   gap: 16px;
 }
 .app-header-btn {
-  background: #2563eb;
+  background: #c42614;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -49,33 +57,48 @@
   display: inline-block;
 }
 .app-header-btn-secondary {
-  background: #e0e7ff;
-  color: #2563eb;
+  background: #fbe7e5;
+  color: #c42614;
 }
 .dark .app-header-btn {
-  background: #60a5fa;
-  color: #23262f;
+  background: #c42614;
+  color: #fff;
 }
 .dark .app-header-btn-secondary {
   background: #23262f;
-  color: #60a5fa;
-  border: 1px solid #60a5fa;
+  color: #c42614;
+  border: 1px solid #c42614;
 }
-.app-header-btn:hover {
-  background: #1746a2;
+.app-header-btn[href="/new"] {
+  background: #c42614;
   color: #fff;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+.dark .app-header-btn[href="/new"] {
+  background: #c42614;
+  color: #fff;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+.app-header-btn[href="/new"]:hover, .app-header-btn[href="/new"]:focus, .app-header-btn[href="/new"]:active,
+.dark .app-header-btn[href="/new"]:hover, .dark .app-header-btn[href="/new"]:focus, .dark .app-header-btn[href="/new"]:active {
+  background: inherit !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: default !important;
 }
 .app-header-btn-secondary:hover {
-  background: #c7d2fe;
-  color: #1746a2;
+  background: #fbe7e5;
+  color: #a31d0f;
 }
 .dark .app-header-btn:hover {
-  background: #2563eb;
+  background: #a31d0f;
   color: #fff;
 }
 .dark .app-header-btn-secondary:hover {
   background: #181a20;
-  color: #60a5fa;
+  color: #c42614;
 }
 .app-main {
   max-width: 1200px;

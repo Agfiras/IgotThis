@@ -78,4 +78,32 @@
 }
 .dark .new-prompt-error {
   color: #f87171;
+}
+.new-prompt-cancel-btn {
+  background: #f3f4f6;
+  color: #e11d48;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.new-prompt-cancel-btn:disabled {
+  background: #f3f4f6;
+  color: #f3f4f6;
+  cursor: not-allowed;
+}
+.new-prompt-cancel-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #1746a2;
+}
+.dark .new-prompt-cancel-btn {
+  background: #23262f;
+  color: #e11d48;
+}
+.dark .new-prompt-cancel-btn:hover:not(:disabled) {
+  background: #181a20;
+  color: #e11d48;
 } 

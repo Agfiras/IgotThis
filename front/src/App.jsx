@@ -17,7 +17,10 @@ function Header() {
   };
   return (
     <header className="app-header">
-      <Link to="/" className="app-title">Prompt Library</Link>
+      <Link to="/" className="app-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <img src="/logo.png" alt="Logo" style={{ height: '36px', width: '36px', objectFit: 'contain', marginRight: '6px' }} />
+        LLMrest
+      </Link>
       <div className="app-header-actions">
         {token && (
           <>

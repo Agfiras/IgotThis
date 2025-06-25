@@ -87,7 +87,7 @@ function LoginPage() {
           style={{ marginTop: 24 }}
         >
           <span style={{ marginRight: 8, fontSize: 20 }}>🔵</span>
-          Sign in with Google
+          {mode === 'login' ? 'Login with Google' : 'Sign in with Google'}
         </button>
         {error && <div className="login-error">{error}</div>}
       </div>

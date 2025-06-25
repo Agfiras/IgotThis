@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const { search, tag, page = 1, limit = 10 } = req.query;
     const query = {};
     if (search) query.$text = { $search: search };
-    if (tag) query.tags = { $in: [tag.toLowerCase()] };
+    if (tag && tag.trim() !== '') query.tags = { $in: [tag.toLowerCase()] };
     const prompts = await Prompt.find(query)
       .sort({ createdAt: -1, _id: -1 })
       .skip((parseInt(page) - 1) * parseInt(limit))
