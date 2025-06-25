@@ -126,17 +126,3 @@ cd llmrest
 
 ---
 
-## License
-
-MIT
-
----
-
-## Credits
-
-- [Vercel](https://vercel.com/)
-- [Render](https://render.com/)
-- [MongoDB Atlas](https://www.mongodb.com/atlas)
-- [React](https://react.dev/)
-- [Express](https://expressjs.com/)
-- [Mongoose](https://mongoosejs.com/)
